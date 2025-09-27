@@ -1,0 +1,47 @@
+body{
+    color: white;
+    background-color: #1d2630;   
+}
+.container {
+    max-width: 800px;
+}
+.prod{
+    margin: 20px;
+    width: 200px;
+    height: 100px;
+    background-color: blue;    
+    font-size: 1.5rem;
+    border-radius: 20px;
+}
+
+.prod a {
+    color: yellow ;
+    text-decoration: none;
+}
+
+.spider{
+    padding: 5px;
+}
+
+
+#tokenDisplay {
+    width: 200px;
+    height: auto;
+    align-content: center;
+    background-color: blue;
+    color: yellow ;
+    border-radius: 10px;
+    white-space: normal; /* Ensures text wraps and does not preserve whitespace or line breaks */
+    word-wrap: break-word; /* Allows long words to be broken and wrapped to the next line */
+    overflow-wrap: break-word; /* Similar to word-wrap, ensures breaking and wrapping of long words */
+    user-select: text; /* Ensures text can be selected */
+}
+#tokenDisplay p {
+    padding: 10px;
+}
+
+#tokenDisplay::selection {
+    background-color: #ffc107; /* Gold background */
+    color: #000; /* Black text */
+    border-radius: 10px;
+}
