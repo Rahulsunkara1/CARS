@@ -14,36 +14,32 @@
 
 <body>
     <div class="container mt-5">
-        <div class="text-center">
-            <h1 class="display-5 mb-5"><strong>REGISTRATION</strong></h1>
-        </div>
-        <div class="main row justify-content-center">
-            <form id="car-form" class="row justify-content-center mb-4" autocomplete="off">
-                <!-- <input type="hidden" name="id" id="userId"> -->
-                <div class="col-10 col-md-8 mb-3">
-                    <label for="username">User Name</label>
-                    <input type="text" name="username" class="form-control" id="username" placeholder="Enter User Name">
-                </div>
-                <div class="col-10 col-md-8 mb-3">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" class="form-control" id="email" placeholder="Enter Email">
-                </div>
-                <div class="col-10 col-md-8 mb-3">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" class="form-control" id="password" placeholder="Password">
-                </div>
-                <div class="col-10 col-md-8 mb">
-                    <input type="submit" class="btn btn-success add-btn" value="submit">
-                </div>
-                <div class="col-10 col-md-8 mb">
-                    <a href="http://localhost:5001/login.html" class="btn btn-success add-btn">Login</a>
-                </div>                
-            </form>
-
-            <div class="col-12 col-md-10" id="token">
-
+        <div class="site-header mb-4">
+            <div>
+                <h1 class="display-6 brand">Create an account</h1>
+                <div class="small-muted">Register to manage cars and upload images.</div>
+            </div>
+            <div>
+                <a href="login.html" class="btn btn-ghost btn-app">Already have an account?</a>
             </div>
         </div>
+
+        <div class="form-card">
+            <form id="car-form" autocomplete="off">
+                <div class="form-row">
+                    <input type="text" name="username" class="form-control" id="username" placeholder="User name">
+                    <input type="email" name="email" class="form-control" id="email" placeholder="Email">
+                </div>
+                <div class="form-row mt-2">
+                    <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                </div>
+                <div class="d-flex gap-2 mt-3">
+                    <button type="submit" class="btn btn-primary-app btn-app">Create account</button>
+                    <div id="regAlert" style="flex:1"></div>
+                </div>
+            </form>
+        </div>
+
     </div>
 </body>
 </html>

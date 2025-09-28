@@ -33,6 +33,13 @@ const carSchema = mongoose.Schema(
         base64: {
             type: String,
         }
+        ,
+        contactEmail: {
+            type: String,
+        },
+        contactPhone: {
+            type: String,
+        }
     },
     {
         collection: "cars",

@@ -3,7 +3,8 @@ import Car from "../models/car.js";
 
 export const getCars = asyncHandler(async (req, res) => {
   try {
-    const cars = await Car.find({ user_id: req.user.id }); // Fetch all cars
+    // Return all cars to display in listings. Server will still enforce ownership on updates/deletes.
+    const cars = await Car.find({}); // Fetch all cars
 
     const formattedCars = cars.map((car) => {
       return {
@@ -21,6 +22,7 @@ export const getCars = asyncHandler(async (req, res) => {
 export const createCar = asyncHandler(async (req, res) => {
   const { carname, price, model,year, make } = req.body;
   const file = req.file;
+  const { contactEmail, contactPhone } = req.body;
 
   // Assuming 'req.user.id' holds the authenticated user's ID
   const userId = req.user.id; // Make sure this is correctly populated
@@ -45,21 +47,12 @@ export const createCar = asyncHandler(async (req, res) => {
       make,
       filename: file.originalname,
       base64: base64Image,
+      contactEmail,
+      contactPhone,
     });
 
-    await car.save();
-    res.status(201).json({
-      message: "Car added successfully",
-      car: {
-        id: car._id,
-        carname: car.carname,
-        price: car.price,
-        model: car.model,
-        year: car.year,
-        make: car.make,
-        filename: car.filename,
-      },
-    });
+    const saved = await car.save();
+    res.status(201).json({ message: 'Car added successfully', car: saved });
   } catch (error) {
     console.error("Failed to save car:", error);
     res.status(500).send("Server error");
@@ -99,6 +92,8 @@ export const updateCar = asyncHandler(async (req, res) => {
   car.model = req.body.model || car.model;
   car.year = req.body.year || car.year;
   car.make = req.body.make || car.make;
+  car.contactEmail = req.body.contactEmail || car.contactEmail;
+  car.contactPhone = req.body.contactPhone || car.contactPhone;
   const updatedCar = await car.save();
 
   res.status(200).json(updatedCar);

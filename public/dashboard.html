@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — Cars</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/dashboard.js" defer></script>
+</head>
+
+<body>
+    <div class="container mt-6 dashboard-root">
+        <header class="dashboard-hero">
+            <div class="hero-inner">
+                <h1 class="brand hero-heading" id="dynamicHeading">Dashboard</h1>
+                <p id="dynamicSub" class="sub-heading small-muted">Overview of your account and listings — quick insights at a glance.</p>
+                <div class="hero-actions" role="toolbar">
+                    <button id="openCarsPage" class="btn btn-ghost btn-app">Open Cars</button>
+                    <button id="addNewBtn" class="btn btn-primary-app btn-app">Add Listing</button>
+                    <button id="themeToggle" class="btn btn-ghost btn-app" title="Toggle theme">Theme</button>
+                    <div class="account-menu">
+                        <button id="accountBtn" class="account-btn">
+                            <div class="avatar" id="accountAvatar">U</div>
+                            <div id="accountName" class="small-muted">Account</div>
+                        </button>
+                        <div id="accountDropdown" class="account-dropdown">
+                            <a href="#" id="accountDetails">Account details</a>
+                            <a href="#" id="accountLogout" class="logout">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard-main">
+            <section class="stats-row">
+                <div class="stat-card form-card">
+                    <div class="small-muted">Total listings</div>
+                    <div class="stat-badge" id="totalListings">—</div>
+                </div>
+                <div class="stat-card form-card">
+                    <div class="small-muted">My listings</div>
+                    <div class="stat-badge" id="myListings">—</div>
+                </div>
+                <div class="stat-card form-card">
+                    <div class="small-muted">Total value</div>
+                    <div class="stat-badge" id="totalValue">$—</div>
+                </div>
+            </section>
+
+            <section class="selected-row">
+                <div id="carDetailsBox" class="selected-card form-card">
+                    <div class="selected-header">
+                        <h4 class="hero-heading">Selected car</h4>
+                        <div class="small-muted">Last viewed on Cars page</div>
+                    </div>
+                    <div id="selectedCar" class="selected-body mt-3 small-muted">No car selected — visit Cars page and click a car to preview it here.</div>
+                </div>
+            </section>
+
+            <section class="account-inline form-card">
+                <h5>Account</h5>
+                <div class="inline-fields">
+                    <div>User: <strong id="accNameInline">—</strong></div>
+                    <div>Email: <strong id="accEmailInline">—</strong></div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Account modal -->
+        <div id="accountBackdrop" class="account-modal-backdrop">
+            <div class="account-modal" role="dialog" aria-modal="true">
+                <div class="header">
+                    <div class="profile-large" id="modalAvatar">U</div>
+                    <div>
+                        <h3 id="modalName">User Name</h3>
+                        <div class="small" id="modalEmail">email@example.com</div>
+                    </div>
+                </div>
+                <div class="meta mt-3">
+                    <div>
+                        <div class="small-muted">Joined</div>
+                        <div id="modalJoined">2025-01-01</div>
+                    </div>
+                    <div>
+                        <div class="small-muted">Listings</div>
+                        <div id="modalListings">0</div>
+                    </div>
+                </div>
+                <div class="cta">
+                    <button id="closeModal" class="btn btn-ghost btn-app">Close</button>
+                    <a id="goToMyListings" href="#" class="btn btn-primary-app btn-app">My Listings</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="addFormContainer" style="display:none"></div>
+    </div>
+</body>
+
+</html>

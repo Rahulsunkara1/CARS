@@ -14,28 +14,28 @@
 
 <body>
 	<div class="container mt-5">
-		<div class="text-center">
-			<h1 class="display-5 mb-5"><strong>LOGIN</strong></h1>
+		<div class="site-header mb-4">
+			<div>
+				<h1 class="display-6 brand">Welcome back</h1>
+				<div class="small-muted">Sign in to continue to the dashboard.</div>
+			</div>
+			<div>
+				<a href="index.html" class="btn btn-ghost btn-app">Create account</a>
+			</div>
 		</div>
-		<div class="main row justify-content-center">
-			<form id="login" class="row justify-content-center mb-4" autocomplete="off">
-				<input type="hidden" name="id" id="userId">
-				<div class="col-10 col-md-8 mb-3">
-					<label for="email">Email</label>
-					<input type="email" name="email" class="form-control" id="email" placeholder="Enter Email">
-				</div>
-				<div class="col-10 col-md-8 mb-3">
-					<label for="password">password</label>
+
+		<div class="form-card">
+			<form id="login" autocomplete="off">
+				<div class="form-row">
+					<input type="email" name="email" class="form-control" id="email" placeholder="Email">
 					<input type="password" name="password" class="form-control" id="password" placeholder="Password">
 				</div>
-				<div class="col-10 col-md-8 mb">
-					<input type="submit" class="btn btn-success add-btn" value="submit">
+				<div class="d-flex gap-2 mt-3">
+					<button type="submit" class="btn btn-primary-app btn-app">Sign in</button>
+					<div id="loginAlert" style="flex:1"></div>
 				</div>
 			</form>
-			<!-- <div class="col-12 col-md-10" id="tokenDisplay"></div> -->
-			<div class="main row justify-content-center" id="prodButton">
-			
-			</div>
+			<div class="mt-3" id="prodButton"></div>
 		</div>
 	</div>
 </body>

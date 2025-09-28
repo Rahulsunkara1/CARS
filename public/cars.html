@@ -13,46 +13,152 @@
 </head>
 
 <body>
-    <div class="container mt-5">
-        <div class="text-center">
-            <h1 class="display-5 mb-5"><strong>PRODUCTS</strong></h1>
-        </div>
-        <div class="main row justify-content-center">
-            <form  id="car-form" class="row justify-content-center mb-4" autocomplete="off">
-                <input type="hidden" name="id" id="carId">
-                <div class="col-10 col-md-8 mb-3">
-                    <label for="carname">Car Name</label>
-                    <input type="text" name="carname" class="form-control" id="carname" placeholder="Enter Car">
+    <div class="container mt-5 cars-root">
+        <header class="cars-hero form-card">
+            <div class="hero-left">
+                <h2 class="brand">CARS</h2>
+                <div class="small-muted">A fresh gallery to browse and manage vehicle listings</div>
+            </div>
+            <div class="hero-center">
+                <div class="searchbar" style="max-width:720px;width:100%">
+                    <input id="searchInput" class="form-control" placeholder="Search cars, model, make or year">
+                    <select id="sortSelect" class="form-select" style="width:160px">
+                        <option value="newest">Newest</option>
+                        <option value="price_asc">Price ↑</option>
+                        <option value="price_desc">Price ↓</option>
+                    </select>
                 </div>
-                <div class="col-10 col-md-8 mb-3">
-                    <label for="price">Price</label>
-                    <input type="text" name="price" class="form-control" id="price" placeholder="Price">
+                <div class="hero-filters" style="margin-left:12px;display:flex;gap:8px;align-items:center">
+                    <button id="myListingsFilter" class="btn btn-ghost btn-app" title="Show only my listings">My listings</button>
+                    <button id="favoritesFilter" class="btn btn-ghost btn-app" title="Show favorites">Favorites</button>
                 </div>
-                <div class="col-10 col-md-8 mb-3">
-                    <label for="model">Model</label>
-                    <input type="text" name="model" class="form-control" id="model" placeholder="Model">
+            </div>
+            <div class="hero-right">
+                <button id="themeToggle" class="btn btn-ghost btn-app" title="Toggle style">Style</button>
+                <div class="account-menu">
+                    <button id="accountBtn" class="account-btn">
+                        <div class="avatar" id="accountAvatar">U</div>
+                        <div id="accountName" class="small-muted">Account</div>
+                    </button>
+                    <div id="accountDropdown" class="account-dropdown">
+                        <a href="#" id="accountDetails">Account details</a>
+                        <a href="#" id="accountLogout" class="logout">Logout</a>
+                    </div>
                 </div>
-                <div class="col-10 col-md-8 mb-3">
-                    <label for="year">Year</label>
-                    <input type="text" name="year" class="form-control" id="year" placeholder="Year">
-                </div>
-                <div class="col-10 col-md-8 mb-3">
-                    <label for="make">Make</label>
-                    <input type="text" name="make" class="form-control" id="make" placeholder="Make">
-                </div>
-                <div class="col-10 col-md-8 mb-3">
-                    <label for="image">Image</label>
-                    <input type="file" name="file" class="form-control" id="carFile" placeholder="Image">
-                </div>
-                <div class="col-10 col-md-8 mb">
-                    <input type="submit" class="btn btn-success add-btn" value="submit">
-                </div>
-            </form>
+            </div>
+        </header>
 
-            <div class="col-12 col-md-10" id="carsList">
-                
+        <main class="cars-main">
+            <section class="gallery-col">
+                <div id="carsList" class="cars-grid gallery-grid" aria-live="polite">
+                    <!-- cards rendered here -->
+                </div>
+            </section>
+
+            <aside class="side-panel form-card">
+                <h4 class="hero-heading">Add / Edit Listing</h4>
+                <form id="car-form" autocomplete="off">
+                    <input type="hidden" name="id" id="carId">
+                    <div class="form-row">
+                        <input type="text" name="carname" class="form-control" id="carname" placeholder="Car name">
+                    </div>
+                    <div class="form-row mt-2">
+                        <input type="text" name="price" class="form-control" id="price" placeholder="Price">
+                        <input type="text" name="model" class="form-control" id="model" placeholder="Model">
+                    </div>
+                    <div class="form-row mt-2">
+                        <input type="text" name="year" class="form-control" id="year" placeholder="Year">
+                        <input type="text" name="make" class="form-control" id="make" placeholder="Make">
+                    </div>
+                    <div class="form-row mt-2">
+                        <input type="file" name="file" class="form-control" id="carFile" accept="image/*">
+                    </div>
+                    <div class="form-row mt-2">
+                        <input type="email" name="contactEmail" class="form-control" id="contactEmail" placeholder="Contact email">
+                        <input type="text" name="contactPhone" class="form-control" id="contactPhone" placeholder="Contact phone">
+                    </div>
+                    <div class="d-flex gap-2 mt-3">
+                        <button type="submit" id="submitBtn" class="btn btn-primary-app btn-app">Add / Save</button>
+                        <button type="button" id="cancelEdit" class="btn btn-ghost btn-app" style="display:none">Cancel</button>
+                        <div id="formAlert" style="flex:1"></div>
+                    </div>
+                    <img id="filePreview" class="file-preview" alt="" style="display:none">
+                </form>
+                <div class="mt-3">
+                    <button id="openDashboardBtn" class="btn btn-ghost btn-app">Open Dashboard</button>
+                </div>
+            </aside>
+        </main>
+
+        <!-- Account modal (shared) -->
+        <div id="accountBackdrop" class="account-modal-backdrop">
+            <div class="account-modal" role="dialog" aria-modal="true">
+                <div class="header">
+                    <div class="profile-large" id="modalAvatar">U</div>
+                    <div>
+                        <h3 id="modalName">User Name</h3>
+                        <div class="small" id="modalEmail">email@example.com</div>
+                    </div>
+                </div>
+                <div class="meta mt-3">
+                    <div>
+                        <div class="small-muted">Joined</div>
+                        <div id="modalJoined">2025-01-01</div>
+                    </div>
+                    <div>
+                        <div class="small-muted">Listings</div>
+                        <div id="modalListings">0</div>
+                    </div>
+                </div>
+                <div class="cta">
+                    <button id="closeModal" class="btn btn-ghost btn-app">Close</button>
+                    <a id="goToMyListings" href="dashboard.html" class="btn btn-primary-app btn-app">My Dashboard</a>
+                </div>
             </div>
         </div>
+
+    <!-- Car detail modal -->
+        <div id="carBackdrop" class="account-modal-backdrop">
+            <div class="account-modal" role="dialog" aria-modal="true" id="carModal">
+                <div class="header">
+                    <div class="profile-large" id="detailAvatar">IMG</div>
+                    <div>
+                        <h3 id="detailName">Car Name</h3>
+                        <div class="small" id="detailPrice">$0</div>
+                    </div>
+                </div>
+                <div class="meta mt-3">
+                    <div>
+                        <div class="small-muted">Make / Model</div>
+                        <div id="detailMake">-</div>
+                    </div>
+                    <div>
+                        <div class="small-muted">Year</div>
+                        <div id="detailYear">-</div>
+                    </div>
+                </div>
+                <div class="meta mt-3">
+                    <div style="grid-column:1/-1">
+                        <div class="small-muted">Contact</div>
+                        <div id="detailContact">-</div>
+                    </div>
+                </div>
+                <div class="cta">
+                    <button id="closeCarModal" class="btn btn-ghost btn-app">Close</button>
+                    <a id="detailEditLink" href="#" class="btn btn-primary-app btn-app" style="display:none">Edit</a>
+                </div>
+            </div>
+        </div>
+        <!-- Application footer -->
+        <footer class="app-footer">
+            <div class="inner">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+                    <div><span class="brand">CARS</span> — Simple listings manager</div>
+                    <div class="small-muted">Built with ❤️ • <a href="#">Docs</a> • <a href="#">API</a></div>
+                </div>
+                <div class="small-muted mt-2">© 2025 CARS App</div>
+            </div>
+        </footer>
     </div>
 </body>
 </html>
