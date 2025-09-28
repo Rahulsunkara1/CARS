@@ -8,6 +8,8 @@ services:
     environment:
       - PORT=5001
       - MONGO_URI=mongodb://mongo:27017/carDB
+      # Development JWT secret — change in production and keep it secret
+      - ACCESS_TOKEN_SECRET=613fda35d989028ded50451e321c30dc2bf56a9dd4331361bac337520ef7c7ba357d5c8d89d90988c5622038c6308decfa27e95415f4ea0da9126620cf7c7aba
     depends_on:
       - mongo
   mongo:
